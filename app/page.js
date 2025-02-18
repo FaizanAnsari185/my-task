@@ -1,11 +1,21 @@
-import CustomForm from "@/components/CustomForm";
+"use client";
+
+import { useState } from "react";
+import MyForm from "@/components/MyForm";
+import DataTable from "@/components/DataTable";
 
 export default function Home() {
+  const [formDataList, setFormDataList] = useState([]);
+
+  const handleFormSubmit = (data) => {
+    setFormDataList((prev) => [...prev, data]);
+  };
+
   return (
-    <>
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <CustomForm />
-    </div>
-    </>
+    <main className="p-6">
+      <h1 className="text-2xl font-bold mb-4">ShadCN Form</h1>
+      <MyForm onSubmit={handleFormSubmit} />
+      <DataTable data={formDataList} />
+    </main>
   );
 }
